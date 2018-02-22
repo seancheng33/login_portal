@@ -1,12 +1,20 @@
+'''
+登陆汕头移动的portal认证系统
+
+模拟登陆到认证界面的页面，然后每10秒获取一起网址，如果不是登陆成功的网址，就重新执行一次登陆的过程，重新登陆系统。
+如果是登陆成功的网址，就什么都不执行，继续休眠10秒。然后再继续。
+
+selenium版本为3.7.0，如果版本是3.8.0或以上，将不再支持phantomjs
+
+'''
+
 import base64
 from time import sleep
-import configparser ,sys
+import configparser
 from selenium import webdriver
 from tkinter import *
 
-#
-# driver =webdriver.Chrome(executable_path='./2.34/chromedriver.exe')
-
+#浏览器头的内容
 userAgent= ("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
 cap = webdriver.DesiredCapabilities.PHANTOMJS
 cap["phantomjs.page.settings.resourceTimeout"] = 100
@@ -15,6 +23,7 @@ cap["phantomjs.page.customHeaders.User-Agent"] = userAgent
 #https的网址连接，需要service_args中的这三项内容,不然会连接失败
 service_args = ['--ignore-ssl-errors=yes','--web-security=false','--ssl-protocol=any']
 
+#无GUI的浏览器phantomjs
 driver = webdriver.PhantomJS(executable_path="./lib/phantomjs.exe", desired_capabilities=cap,service_args=service_args)
 driver.set_window_size(1366,768)
 driver.set_page_load_timeout(30)
@@ -39,6 +48,7 @@ if __name__ == "__main__":
     except Exception as e:
         print('错误信息：',str(e))
         sys.exit(0)
+
 
     while True:
         try:
