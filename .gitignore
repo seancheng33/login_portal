@@ -1,0 +1,6 @@
+﻿config.ini
+*.log
+*.spec
+.idea/*
+build/*
+dist/*
