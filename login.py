@@ -9,10 +9,10 @@ selenium版本为3.7.0，如果版本是3.8.0或以上，将不再支持phantomj
 '''
 
 import base64
-from time import sleep
+import sys
 import configparser
 from selenium import webdriver
-from tkinter import *
+from time import sleep
 
 #浏览器头的内容
 userAgent= ("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
@@ -58,6 +58,7 @@ if __name__ == "__main__":
             print('账号登陆到达上限，确定剔除一个登陆的账号')
             driver.find_element_by_xpath(
                 '//*[@id="DSIDConfirmForm"]/blockquote/table/tbody/tr[2]/td/table/tbody/tr[2]/td/input[1]').click()
+            print('登陆成功')
     except Exception as e:
         print('错误信息：', str(e))
         sys.exit(0)
@@ -72,6 +73,7 @@ if __name__ == "__main__":
                 print('账号登陆到达上限，确定剔除一个登陆的账号')
                 driver.find_element_by_xpath(
                     '//*[@id="DSIDConfirmForm"]/blockquote/table/tbody/tr[2]/td/table/tbody/tr[2]/td/input[1]').click()
+                print('登陆成功')
             if currenturl != 'https://auth.st.gmcc.net/dana/home/infranet.cgi':
                 print('登陆状态失效，重新登陆...')
                 login_to()
