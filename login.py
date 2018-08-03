@@ -69,14 +69,16 @@ if __name__ == "__main__":
             # 无限循环，没隔一段时间就判断是否是登陆成功的网站，如果不是，就重新执行登陆
             sleep(10)
             currenturl = driver.current_url
-            if 'session-limit' in str(currenturl):
-                print('账号登陆到达上限，确定剔除一个登陆的账号')
-                driver.find_element_by_xpath(
-                    '//*[@id="DSIDConfirmForm"]/blockquote/table/tbody/tr[2]/td/table/tbody/tr[2]/td/input[1]').click()
-                print('登陆成功')
+
             if currenturl != 'https://auth.st.gmcc.net/dana/home/infranet.cgi':
-                print('登陆状态失效，重新登陆...')
-                login_to()
+                if 'session-limit' in str(currenturl):
+                    print('账号登陆到达上限，确定剔除一个登陆的账号')
+                    driver.find_element_by_xpath(
+                        '//*[@id="DSIDConfirmForm"]/blockquote/table/tbody/tr[2]/td/table/tbody/tr[2]/td/input[1]').click()
+                    print('登陆成功')
+                else:
+                    print('登陆状态失效，重新登陆...')
+                    login_to()
         except Exception as error:
             #报错后重新登陆
             print(str(error))
