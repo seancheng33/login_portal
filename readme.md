@@ -21,3 +21,4 @@ conf.ini配置文件只有两个参数
 在打包成exe移植到其他的win系统中，在运行时，可能出现报错api-ms-win-crt-runtimel1-1-0.dll缺失，应该是处在与win7或win8.1及以下的window系统中，解决的办法可以自行上网查找
 
 #### 最近更新
+添加一个如果portal登陆到达上限，踢掉一个IP继续登陆
