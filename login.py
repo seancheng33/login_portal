@@ -43,8 +43,6 @@ def login_to():
     driver.find_element_by_xpath('/html/body/blockquote/form/table/tbody/tr[4]/td[1]/table/tbody/tr[5]/td[3]/input').submit()
     print('登陆成功')
 
-def confirm_login():
-    driver.find_element_by_xpath('//*[@id="DSIDConfirmForm"]/blockquote/table/tbody/tr[2]/td/table/tbody/tr[2]/td/input[1]').click()
 
 if __name__ == "__main__":
     try:
@@ -56,7 +54,10 @@ if __name__ == "__main__":
             print('用户名或密码错误，重新登陆')
             login_to()
         if 'session-limit' in currenturl:
-            driver.find_element_by_xpath('//*[@id="DSIDConfirmForm"]/blockquote/table/tbody/tr[2]/td/table/tbody/tr[2]/td/input[1]').click()
+            # portal有账号登陆的上限，
+            print('账号登陆到达上限，确定剔除一个登陆的账号')
+            driver.find_element_by_xpath(
+                '//*[@id="DSIDConfirmForm"]/blockquote/table/tbody/tr[2]/td/table/tbody/tr[2]/td/input[1]').click()
     except Exception as e:
         print('错误信息：', str(e))
         sys.exit(0)
@@ -64,12 +65,13 @@ if __name__ == "__main__":
 
     while True:
         try:
-            #无限循环，没隔一段时间就判断是否是登陆成功的网站，如果不是，就重新执行登陆
+            # 无限循环，没隔一段时间就判断是否是登陆成功的网站，如果不是，就重新执行登陆
             sleep(10)
             currenturl = driver.current_url
             if 'session-limit' in str(currenturl):
                 print('账号登陆到达上限，确定剔除一个登陆的账号')
-                confirm_login()
+                driver.find_element_by_xpath(
+                    '//*[@id="DSIDConfirmForm"]/blockquote/table/tbody/tr[2]/td/table/tbody/tr[2]/td/input[1]').click()
             if currenturl != 'https://auth.st.gmcc.net/dana/home/infranet.cgi':
                 print('登陆状态失效，重新登陆...')
                 login_to()
