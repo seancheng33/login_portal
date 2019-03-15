@@ -34,7 +34,7 @@ with open('conf.ini','r') as conf_file:
     conf.read_file(conf_file)
 
 def login_to():
-    driver.get("https://auth.st.gmcc.net/dana-na/auth/url_1/welcome.cgi")
+    driver.get("https://")
     username = conf.get('config','username')
     password = base64.b64decode(conf.get('config','password'))#密码是加密的，需要解密出来
     password = str(password,'utf-8')#解密出来的内容是byte，需要转换成str
