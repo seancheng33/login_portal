@@ -50,7 +50,7 @@ if __name__ == "__main__":
         sleep(10)
         currenturl = driver.current_url
         # print(currenturl)
-        if 'https://auth.st.gmcc.net/dana-na/auth/url_1/welcome.cgi?p=failed' in currenturl:
+        if 'https://***/welcome.cgi?p=failed' in currenturl:
             print('用户名或密码错误，重新登陆')
             login_to()
         if 'session-limit' in currenturl:
@@ -70,7 +70,7 @@ if __name__ == "__main__":
             sleep(10)
             currenturl = driver.current_url
 
-            if currenturl != 'https://auth.st.gmcc.net/dana/home/infranet.cgi':
+            if currenturl != 'https://***/dana/home/infranet.cgi':
                 if 'session-limit' in str(currenturl):
                     print('账号登陆到达上限，确定剔除一个登陆的账号')
                     driver.find_element_by_xpath(
